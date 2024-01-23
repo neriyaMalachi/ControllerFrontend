@@ -1,5 +1,4 @@
-import { Box, Button, Flex, Image } from "@mantine/core";
-import React from "react";
+import {  Button, Flex, Image } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
 function NavBar() {
@@ -17,8 +16,8 @@ function NavBar() {
          w={"70px"}
        />
        <Flex  w={"30%"} justify={"space-between"} align={"end"}>
-        <Button onClick={()=>navigate("/configPage")}>configPage</Button>
-        <Button onClick={()=>navigate("/controllerPage")}>controllerPage</Button>
+        <Button onClick={()=>navigate("/configPage")}>config</Button>
+        <Button onClick={()=>navigate("/controllerPage")}>controller</Button>
         <Button onClick={()=>navigate("/")}>logOut</Button>
 
        </Flex>
