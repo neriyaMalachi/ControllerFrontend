@@ -18,7 +18,11 @@ function ConfigPage() {
         <Editor
           theme="monokai"
           value={jsonData}
-          onChange={(newValue: any) => setjsonData(newValue)}
+          onChange={(newValue: any) => {
+            console.log(newValue);
+
+            setjsonData(newValue);
+          }}
           name="UNIQUE_ID_OF_DIV"
           editorProps={{ $blockScrolling: true }}
         />
