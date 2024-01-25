@@ -6,7 +6,6 @@ import Loginpage from "./pages/Loginpage";
 import ConfigPage from "./pages/ConfigPage";
 import ControllerPage from "./pages/ControllerPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import NavBar from "./pages/NavBar";
 export default function App() {
   const queryClient = new QueryClient();
   return (

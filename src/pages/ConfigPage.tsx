@@ -1,6 +1,7 @@
-import { Box, Center } from "@mantine/core";
+import { Box,  Button, Center } from "@mantine/core";
 import { JsonEditor as Editor } from "jsoneditor-react";
 import { useState } from "react";
+import "jsoneditor-react/es/editor.min.css";
 import NavBar from "./NavBar";
 
 function ConfigPage() {
@@ -15,16 +16,14 @@ function ConfigPage() {
       <NavBar />
 
       <Center w={"100%"} h={"85vh"}>
+        <Button
+          onClick={() => setjsonData({ name: "nnnn", age: 12, city: "rosh" })}
+        >
+          change
+        </Button>
         <Editor
-          theme="monokai"
           value={jsonData}
-          onChange={(newValue: any) => {
-            console.log(newValue);
-
-            setjsonData(newValue);
-          }}
-          name="UNIQUE_ID_OF_DIV"
-          editorProps={{ $blockScrolling: true }}
+          onChange={(updateJson: any) =>{ setjsonData(updateJson)}}
         />
       </Center>
     </Box>
