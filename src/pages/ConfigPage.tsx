@@ -9,12 +9,17 @@ function ConfigPage() {
   const [Age, setAge] = useState<number>();
   const [City, setCity] = useState<string>("");
 
+
+
+
+  
+  
+
   const [jsonData, setjsonData] = useState({
     name: "John",
     age: 50,
     city: "New York",
   });
-
   return (
     <Box>
       <NavBar />
