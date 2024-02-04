@@ -1,36 +1,50 @@
 import { Card, Text, Button, Center, Flex, Input } from "@mantine/core";
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
-import { useLocalStoreage } from "../hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 function Loginpage() {
-
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
-  const [messageError, setMessageError] = useState(false);
+  const [PasswordError, setPasswordError] = useState(false);
+  const [userNotSignUp, setuserNotSignUp] = useState(false);
+  const [generalError, setGeneralError] = useState(false);
 
+  const [users, setUsers] = useState(["neriya", "mordechay", "yosi"]);
 
-  const validation =  () => {
+  const validation = () => {
     const lower = new RegExp("(?=.*[a-z])");
     const upper = new RegExp("(?=.*[A-Z])");
     const numbers = new RegExp("(?=.*[0-9])");
     const special = new RegExp("(?=.*[!@#$%^&*])");
     const length = new RegExp("(?=.{6,})");
-    if (
-      lower.test(password) &&
-      upper.test(password) &&
-      numbers.test(password) &&
-      special.test(password) &&
-      length.test(password) &&
-      userName.length > 2
-    ) {
-    navigate("/configPage");
-    } else {
-    setMessageError(true);
+    if(userName && password){
+      setGeneralError(false)
+      setuserNotSignUp(false)
+      setPasswordError(false)
+      for (let i = 0; i < users.length; i++) {
+        if (users[i] === userName) {
+          setuserNotSignUp(false);
+  
+          if (
+            lower.test(password) &&
+            upper.test(password) &&
+            numbers.test(password) &&
+            special.test(password) &&
+            length.test(password) &&
+            userName.length > 2
+          ) {
+            navigate("/configPage");
+          } else {
+            setPasswordError(true);
+          }
+        }else{
+          setuserNotSignUp(true);
+  
+        }
+      }
+    }else{
+      setGeneralError(true)
     }
-    
-    const { setUser } = useLocalStoreage("value");
-    setUser(userName);
   };
 
   return (
@@ -67,24 +81,31 @@ function Loginpage() {
             onChange={(e: any) => setPassword(e.target.value)}
           />
         </Flex>
-        <Button
-          onClick={ validation}
-          color="blue"
-          fullWidth
-          mt="md"
-          radius="md"
-        >
+        <Button onClick={validation} color="blue" fullWidth mt="md" radius="md">
           Login
         </Button>
-        {messageError ? (
-          <Text c={"red"} size="xs">
+        {PasswordError ? (
+          <Text c={"red"} size="xs" dir="rtl">
             חייב להכיל: סימן, אות גדולה וקטנה, מספר ,וארך מינימלי 6 ,ושם משתמש
             מעל 2 אותיות
           </Text>
         ) : (
           <></>
         )}
-
+        {userNotSignUp ? (
+          <Text c={"red"} size="sm" dir="rtl">
+            משתמש לא קיים!!
+          </Text>
+        ) : (
+          <></>
+        )}
+         {generalError ? (
+          <Text c={"red"} size="sm" dir="rtl">
+            חייב למלא את שתי השדות
+          </Text>
+        ) : (
+          <></>
+        )}
         <a href="#">signUp</a>
       </Card>
     </Center>
